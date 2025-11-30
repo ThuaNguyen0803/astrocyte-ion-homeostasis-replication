@@ -492,7 +492,7 @@ plt.tight_layout()
 """# Notes and next steps
 
 **Model status (v1)**  
-- This version is the first version of my mini project to implement a single-compartment astrocyte with Na⁺/K⁺/Cl⁻/Ca²⁺ dynamics.  
+- This version is the first version of my mini project to implement astrocyte ion dynamics and glutamate flux.
 - Fluxes currently include: leaks, Na⁺/K⁺-ATPase (NKA), NKCC, KCC1, NBC, NHE, NCX, and Na⁺-dependent glutamate transporters.  
 - Parameters and flux forms are adapted from Ullah lab models (Thapaliya et al., 2023; Meyer et al., 2025).  
 - Simulations here focus on baseline behavior and simple parameter sweeps to check drift and steady states and relation to glutamate fluxes.
@@ -502,6 +502,19 @@ plt.tight_layout()
 - Calcium dynamics are not added yet
 - Astrocyte is treated as a single well-mixed compartment (no soma versus processes, no spatial gradients).  
 - Parameters are not yet systematically fit to specific experiments; they are taken directly or slightly adjusted from the source papers.
+
+**Current results (v1)**
+- In this version, I mainly explored and observed:
+- Whether a given parameter set allows the astrocyte to reach a stable baseline for Na⁺, K⁺, and Cl⁻ instead of drifting.
+- How sensitive the steady state is to pump strength and leak conductances.
+-	How ion trajectories and dynamics work with glutamate pulses.
+
+**What I learned**
+In this project I practiced:
+- Working with Jupyter/Colab notebooks for scientific computing
+- Basic data analysis or modeling in computational neuroscience
+- Replication and critical thinking skills (especially how to calibrate parameters to fit model) - Writing cleaner code and comments
+- Using GitHub for version control and sharing my work
 
 **Planned next steps**  
 - Add NMDA and AMPA receptor fluxes to model glutamate-evoked Na⁺/Ca²⁺ entry.

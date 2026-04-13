@@ -84,7 +84,7 @@ The updated notebook `astrocyte_ion_homeostasis_replication_v2.ipynb` builds on 
 
 | Simulation | State variables | Purpose |
 |---|---|---|
-| Sim 0 | Ca_a, s_ER, IP3, h | Standalone calcium/ER test |
+| Sim 0a | Ca_a, s_ER, IP3, h | Standalone calcium/ER test |
 | Sim 0b | 9 receptor states | Standalone NMDA + AMPA kinetics test (2 s window) |
 | Sim 1 | Na_a, Na_o | Sodium-only + glutamate response |
 | Sim 2 | Na_a, Na_o, K_a, K_o, Cl_a, Cl_o, V | Full ions, no calcium |

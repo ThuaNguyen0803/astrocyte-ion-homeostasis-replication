@@ -64,7 +64,31 @@ The current notebook `astrocyte_ion_homeostasis_replication_v1.ipynb`:
 5. **Plots and interprets outcomes**  
    - Time courses of ion concentrations and membrane potential  
    - How changes in Na⁺ driving force impact glutamate transport and K⁺ uptake via the NKA  
+---
+## What the notebook does (v2 — current)
+The updated notebook `astrocyte_ion_homeostasis_replication_v2.ipynb` builds on v1 and adds a complete calcium signaling system and receptor kinetics, expanding the model from 7 to 20 state variables.
 
+**New additions:**
+- Cytosolic Ca²⁺ and ER calcium store tracked as dynamic ODE variables
+- IP3 production via glutamate → G-protein cascade
+- IP3R-mediated Ca²⁺ release, SERCA reuptake, and ER leak flux
+- IP3R inactivation variable (h) and calcium buffering factor (B_cyt)
+- **NMDA receptor — 5-state Markov model** (states: R, AR, A2R, A2D, O_NMDA); carries Na⁺, K⁺, Ca²⁺
+- **AMPA receptor — 6-state Markov model** (states: C0, C1, C2, D1, D2, O_AMPA); carries Na⁺, K⁺
+- Dynamic NCX that responds to live Ca²⁺ changes (was static in v1)
+- Multi-pulse glutamate stimulus function
+- Fixed electroneutrality: dCl = dNa + dK + 2·dCa (Ca²⁺ term was missing in v1)
+- Fixed NMDA/AMPA current units: divided by cell surface area (65.63 µm²) to get pA/µm²
+
+**Simulation modes in v2:**
+
+| Simulation | State variables | Purpose |
+|---|---|---|
+| Sim 0 | Ca_a, s_ER, IP3, h | Standalone calcium/ER test |
+| Sim 0b | 9 receptor states | Standalone NMDA + AMPA kinetics test (2 s window) |
+| Sim 1 | Na_a, Na_o | Sodium-only + glutamate response |
+| Sim 2 | Na_a, Na_o, K_a, K_o, Cl_a, Cl_o, V | Full ions, no calcium |
+| Sim 3 | All 20 variables | Complete astrocyte model |
 ---
 
 ## Methods and tools
@@ -98,12 +122,11 @@ This repo is my starting point for that line of work—a first step toward more 
 
 **Next goals to be implemented soon**
 
-- Parameter sweeps for various ions (especially Na⁺)  
-- Add explicit Ca²⁺ dynamics  
-- Add NMDA and AMPA receptor fluxes to represent glutamate-evoked Na⁺ and Ca²⁺ entry more completely  
-- Introduce astrocytic sub-compartments (soma and processes) to study local Na⁺ microdomains and their impact on glutamate uptake  
-- Incorporate real neuromorphological data for astrocyte geometry and distances  
-- Explore how distance between soma and processes and differences in local Na⁺ affect glutamate flux and K⁺ uptake  
+- Implement ischemia protocol: Na⁺/K⁺-ATPase pump cut to 50% capacity during t = 100–120 s
+- Zero NBC and NHE to fully match Fortran reference for validated comparison
+- BK channel, EET signaling, TRPV4 channel integration
+- Implement energy expenditure tracking
+- Astrocytic sub-compartments (soma and processes) with real neuromorphological data
 
 **Longer-term ideas**
 
